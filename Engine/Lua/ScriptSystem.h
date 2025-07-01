@@ -2,4 +2,5 @@
 
 namespace Engine {
     void InitLua();
+    void CallLuaUpdate();
 }

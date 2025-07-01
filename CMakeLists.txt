@@ -20,6 +20,7 @@ include_directories(
     ThirdParty/sol2/include
     ThirdParty/bullet3/src
     ThirdParty/lua/include
+    ThirdParty/imgui
 )
 
 # -------------------------
@@ -39,11 +40,12 @@ add_subdirectory(ThirdParty/glfw)
 # GLAD
 add_library(glad STATIC
     ThirdParty/glad/src/glad.c
- "Engine/Lua/ScriptSystem.h" "Engine/Lua/ScriptSystem.cpp" "Engine/Input/Input.cpp" "Engine/Input/Input.h")
+ "Engine/Lua/ScriptSystem.h" "Engine/Lua/ScriptSystem.cpp" "Engine/Input/Input.cpp" "Engine/Input/Input.h" "Engine/Graphics/camera.h" "Engine/Graphics/camera.cpp")
 target_include_directories(glad PUBLIC ThirdParty/glad/include)
 
 # Bullet
 add_subdirectory(ThirdParty/bullet3)
+
 
 # -------------------------
 # Source Files
@@ -56,13 +58,16 @@ file(GLOB_RECURSE ENGINE_SRC
     Engine/Assets/*.cpp
 )
 
+
+
 # -------------------------
 # Executable
 # -------------------------
 add_executable(SoulsEngine
     main.cpp
     ${ENGINE_SRC}
- "Engine/Lua/ScriptSystem.h" "Engine/Lua/ScriptSystem.cpp" "Engine/Input/Input.cpp" "Engine/Input/Input.h")
+    Engine/Graphics/Skybox.cpp
+    "Engine/Lua/ScriptSystem.h" "Engine/Lua/ScriptSystem.cpp" "Engine/Input/Input.cpp" "Engine/Input/Input.h" "Engine/Graphics/camera.h" "Engine/Graphics/camera.cpp")
 
 # -------------------------
 # Link Libraries
@@ -75,6 +80,25 @@ target_link_libraries(SoulsEngine
     LinearMath
     lua54
 )
+
+# ImGui
+file(GLOB IMGUI_SRC
+    ThirdParty/imgui/*.cpp
+    ThirdParty/imgui/backends/imgui_impl_glfw.cpp
+    ThirdParty/imgui/backends/imgui_impl_opengl3.cpp
+)
+
+add_library(imgui STATIC ${IMGUI_SRC} "Engine/Graphics/camera.h" "Engine/Graphics/camera.cpp")
+
+target_include_directories(imgui PUBLIC
+    ThirdParty/imgui
+    ThirdParty/imgui/backends
+)
+
+target_link_libraries(SoulsEngine imgui)
+
+file(COPY Game/Shaders DESTINATION ${CMAKE_BINARY_DIR}/Game)
+
 
 # -------------------------
 # Platform-specific settings
