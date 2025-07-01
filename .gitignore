@@ -1,0 +1,52 @@
+# Build output
+build/
+out/
+bin/
+*.exe
+*.dll
+*.lib
+*.pdb
+*.obj
+
+# Visual Studio
+*.sln
+*.vcxproj*
+*.user
+*.opensdf
+*.sdf
+*.VC.db
+*.ipch
+.vscode/
+.vs/
+
+
+# CMake generated
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Logs
+*.log
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+
+# Lua bytecode (if ever used)
+*.luac
+
+# IDE backup / temp files
+*.bak
+*.tmp
+*.swp
+
+# Cache
+*.pch
+*.tlog
+
+# Generated folders
+ThirdParty/bullet3/build/
+ThirdParty/glfw/build/
+ThirdParty/lua/lib/
+ThirdParty/lua/bin/
