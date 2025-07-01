@@ -16,6 +16,7 @@ include_directories(
 
     ThirdParty/glad/include
     ThirdParty/glm
+    ThirdParty/glfw/include
     ThirdParty/sol2/include
     ThirdParty/bullet3/src
     ThirdParty/lua/include
@@ -38,7 +39,7 @@ add_subdirectory(ThirdParty/glfw)
 # GLAD
 add_library(glad STATIC
     ThirdParty/glad/src/glad.c
- "Engine/Lua/ScriptSystem.h" "Engine/Lua/ScriptSystem.cpp")
+ "Engine/Lua/ScriptSystem.h" "Engine/Lua/ScriptSystem.cpp" "Engine/Input/Input.cpp" "Engine/Input/Input.h")
 target_include_directories(glad PUBLIC ThirdParty/glad/include)
 
 # Bullet
@@ -61,7 +62,7 @@ file(GLOB_RECURSE ENGINE_SRC
 add_executable(SoulsEngine
     main.cpp
     ${ENGINE_SRC}
- "Engine/Lua/ScriptSystem.h" "Engine/Lua/ScriptSystem.cpp")
+ "Engine/Lua/ScriptSystem.h" "Engine/Lua/ScriptSystem.cpp" "Engine/Input/Input.cpp" "Engine/Input/Input.h")
 
 # -------------------------
 # Link Libraries

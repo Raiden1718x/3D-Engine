@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "../Lua/ScriptSystem.h"
+#include "../Input/Input.h"
 
 namespace Engine {
 
@@ -47,6 +48,8 @@ namespace Engine {
         glfwDestroyWindow(window);
         glfwTerminate();
         std::cout << "[Engine] Shutdown complete.\n";
+
+        Engine::Input::Init(window);
     }
 
 }
